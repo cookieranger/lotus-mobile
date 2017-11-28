@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { Text, Image, View } from 'react-native';
-import { Card, CardSection, Input, Button } from './common';
+import { View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Card, CardSection, Button } from './common';
 
 class Menu extends Component {
+  onButtonCommandsPress() {
+    Actions.commandes();
+  }
+
   render() {
     return (
       <View>
@@ -16,7 +21,7 @@ class Menu extends Component {
 
         <Card>
           <CardSection>
-            <Button>
+            <Button onPress={this.onButtonCommandsPress.bind(this)}>
               Commandes
             </Button>
           </CardSection>
@@ -33,13 +38,5 @@ class Menu extends Component {
     );
   }
 }
-
-const styles = {
-  imageStyle: {
-    height: 300,
-    width: 300,
-    alignSelf: 'center'
-  }
-};
 
 export default Menu;
