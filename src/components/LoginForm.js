@@ -1,34 +1,49 @@
 import React, { Component } from 'react';
-import { Text, Image, View } from 'react-native';
-import { Card, CardSection, Input, Button } from './common';
+import { Image, View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Card, CardSection, InputLabel, Button } from './common';
 
 class LoginForm extends Component {
+  state = { 
+    email: '',
+    password: ''
+  };
+
+  onButtonPress() {
+    const { email, password } = this.state;
+    if ((email === 'lotus' || email === 'Lotus') && password === '1234') {
+      this.setState({ email: '', password: '' });
+      Actions.menu();
+    }
+  }
+
   render() {
     return (
       <View>
         <Card>
           <CardSection>
-            <Input
+            <InputLabel
               label="Courriel"
               placeholder="nom@domaine.com"
-              value={this.props.email}
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })}
             />
           </CardSection>
 
           <CardSection>
-            <Input
+            <InputLabel
               label="Mot de passe"
               placeholder="********"
-              value={this.props.password}
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })}
             />
           </CardSection>
 
           <CardSection>
-            <Button>
+            <Button onPress={this.onButtonPress.bind(this)}>
               Connexion
             </Button>
           </CardSection>
-
         </Card>
 
         <View style={{ paddingTop: 40 }}>

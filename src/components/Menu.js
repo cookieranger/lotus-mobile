@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, Header } from './common';
 
 class Menu extends Component {
-  onButtonCommandsPress() {
-    Actions.commandes();
-  }
-
   render() {
     return (
       <View>
+        <Header>Projet LOTUS</Header>
         <Card>
           <CardSection>
-            <Button>
+            <Button onPress={Actions.resultats}>
               Résultats
             </Button>
           </CardSection>
-        </Card>
 
-        <Card>
           <CardSection>
-            <Button onPress={this.onButtonCommandsPress.bind(this)}>
+            <Button onPress={Actions.variables}>
+              Variables
+            </Button>
+          </CardSection>
+
+          <CardSection>
+            <Button onPress={Actions.commandes}>
               Commandes
             </Button>
           </CardSection>
-        </Card>
 
-        <Card>
           <CardSection>
-            <Button>
+            <Button onPress={Actions.pop}>
               Déconnexion
             </Button>
           </CardSection>

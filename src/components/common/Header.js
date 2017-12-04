@@ -5,7 +5,7 @@ const Header = (props) => {
   const { textStyle, viewStyle } = styles;
   return (
     <View style={viewStyle}>
-      <Text style={textStyle}>{props.headerText}</Text>
+      <Text style={textStyle}>{props.children}</Text>
     </View>
   );
 };
@@ -28,4 +28,4 @@ const styles = {
   }
 };
 
-export { Header }
+export { Header };
