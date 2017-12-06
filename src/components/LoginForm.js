@@ -11,10 +11,10 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.state;
-    if ((email === 'lotus' || email === 'Lotus') && password === '1234') {
+    // if ((email === 'lotus' || email === 'Lotus') && password === '1234') {
       this.setState({ email: '', password: '' });
       Actions.menu();
-    }
+    // }
   }
 
   render() {

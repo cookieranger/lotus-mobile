@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
+import TestSelectionReducer from './TestSelectionReducer';
 
 export default combineReducers({
-  banana: () => []
+  selectedTest: TestSelectionReducer
 });

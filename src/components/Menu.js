@@ -10,20 +10,26 @@ class Menu extends Component {
         <Header>Projet LOTUS</Header>
         <Card>
           <CardSection>
-            <Button onPress={Actions.resultats}>
-              Résultats
+            <Button onPress={Actions.tests}>
+              Liste des tests
+            </Button>
+          </CardSection>
+
+          <CardSection>
+            <Button onPress={Actions.status}>
+              Status des bouées
             </Button>
           </CardSection>
 
           <CardSection>
             <Button onPress={Actions.variables}>
-              Variables
+              Modifier variables
             </Button>
           </CardSection>
 
           <CardSection>
             <Button onPress={Actions.commandes}>
-              Commandes
+              Envoyer commandes
             </Button>
           </CardSection>
 
