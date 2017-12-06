@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Button, Header } from './common';
 
@@ -7,7 +7,7 @@ class Menu extends Component {
   render() {
     return (
       <View>
-        <Header>Projet LOTUS</Header>
+
         <Card>
           <CardSection>
             <Button onPress={Actions.tests}>
@@ -33,15 +33,26 @@ class Menu extends Component {
             </Button>
           </CardSection>
 
-          <CardSection>
-            <Button onPress={Actions.pop}>
-              Déconnexion
-            </Button>
-          </CardSection>
+
         </Card>
+
+        <View style={{ paddingTop: 10 }}>
+          <Image
+            style={styles.imageStyle}
+            source={require('./logo.png')}
+          />
+        </View>
       </View>
     );
   }
 }
+
+const styles = {
+  imageStyle: {
+    height: 240,
+    width: 240,
+    alignSelf: 'center'
+  }
+};
 
 export default Menu;

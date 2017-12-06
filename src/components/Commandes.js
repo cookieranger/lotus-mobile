@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { View, Picker } from 'react-native';
-import { Card, CardSection, Button, Input, Header } from './common';
+import { Card, CardSection, Button, Header } from './common';
 
 const baseURL = 'https://lotus-udes.herokuapp.com';
 const indexAction = 255;
@@ -9,7 +9,8 @@ const indexAction = 255;
 class Commandes extends Component {
   state = { 
     actions: [],
-    selectedAction: ''
+    selectedAction: '',
+    selectedBouee: 0,
   };
 
   componentWillMount() {
@@ -27,8 +28,9 @@ class Commandes extends Component {
   }
 
   sendData() {
+    const index = indexAction - this.state.selectedBouee;
     axios.post(`${baseURL}/updateVariable`, {
-      index: indexAction,
+      index,
       value: this.state.actions.indexOf(this.state.selectedAction),
       type: '3g'
     });
@@ -40,10 +42,15 @@ class Commandes extends Component {
         <Card>
           <Header>Envoyer commande</Header>
           <CardSection>
-            <Input
-              placeholder="ACTION_CMD"
-              editable={false}
-            />
+            <Picker
+              style={{ flex: 1, width: 200, height: 100 }}
+              itemStyle={{height: 100}}
+              selectedValue={this.state.selectedBouee}
+              onValueChange={selectedBouee => this.setState({ selectedBouee })}
+            >
+              <Picker.Item label={'Bouée 1'} value={0} />
+              <Picker.Item label={'Bouée 2'} value={1} />
+            </Picker>
           </CardSection>
 
           <CardSection>

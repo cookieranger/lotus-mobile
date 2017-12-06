@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { View, Picker } from 'react-native';
+import { View, Picker, Platform } from 'react-native';
 import { Card, CardSection, Button, Input, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 import { selectTest } from '../actions';
@@ -35,6 +35,25 @@ class Tests extends Component {
     Actions.graphique({ capteur });
   }
 
+  renderSectionButtons() {
+    if (Platform.OS === 'ios') {
+      return (
+        <CardSection>
+          <Button onPress={this.showGraph.bind(this, 0)}>
+            LED bleue
+          </Button>
+          <Button onPress={this.showGraph.bind(this, 1)}>
+            LED verte
+          </Button>
+          <Button onPress={this.showGraph.bind(this, 2)}>
+            Température
+          </Button>
+        </CardSection>
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
       <View>
@@ -53,17 +72,7 @@ class Tests extends Component {
             </Picker>
           </CardSection>
 
-          <CardSection>
-            <Button onPress={this.showGraph.bind(this, 0)}>
-              LED bleue
-            </Button>
-            <Button onPress={this.showGraph.bind(this, 1)}>
-              LED verte
-            </Button>
-            <Button onPress={this.showGraph.bind(this, 2)}>
-              Température
-            </Button>
-          </CardSection>
+          {this.renderSectionButtons()}
         </Card>
       </View>
     );
