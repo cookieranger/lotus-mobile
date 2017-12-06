@@ -12,11 +12,10 @@ const RouterComponent = () => {
   return (
     <Router>
       <Stack key="root">
-      <Scene key="status" component={Status} title="Status des bouées" />
         <Scene key="login" component={LoginForm} title="Authentification" />
         <Scene key="menu" component={Menu} title="Menu" />
         <Scene key="tests" component={Tests} title="Liste des tests" />
-        
+        <Scene key="status" component={Status} title="Status des bouées" />
         <Scene key="graphique" component={Graphique} title="Graphique" />
         <Scene key="variables" component={Variables} title="Modifier variables" />
         <Scene key="commandes" component={Commandes} title="Envoyer commandes" />

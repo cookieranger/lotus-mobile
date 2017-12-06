@@ -3,8 +3,7 @@ import axios from 'axios';
 import { View, Picker } from 'react-native';
 import { Card, CardSection, Button, Input, Header } from './common';
 
-// const baseURL = 'https://lotus-udes.herokuapp.com';
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://lotus-udes.herokuapp.com';
 
 class Variables extends Component {
   state = { 

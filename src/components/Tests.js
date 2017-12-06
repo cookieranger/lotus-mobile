@@ -7,7 +7,6 @@ import { selectTest } from '../actions';
 import { connect } from 'react-redux';
 
 const baseURL = 'https://lotus-udes.herokuapp.com';
-// const baseURL = 'http://localhost:3000';
 
 class Tests extends Component {
   state = { 

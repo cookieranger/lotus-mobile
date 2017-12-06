@@ -5,14 +5,13 @@ import { View, Text } from 'react-native';
 import { Card, CardSection, Button, Header } from './common';
 
 const baseURL = 'https://lotus-udes.herokuapp.com';
-// const baseURL = 'http://localhost:3000';
 
 const indexAction = 255;
 const indexStart = 3;
 
 class Status extends Component {
   state = {
-    latestTest: {},
+    latestTest: [{}, {}],
     runningTest: []
   }
 
@@ -27,10 +26,9 @@ class Status extends Component {
     console.log(`${baseURL}/api/tests/getLatest`)
     axios.get(`${baseURL}/api/tests/getLatest/${station}`)
       .then((res) => {
-        console.log(res);
-        this.setState({
-          latestTest: res.data
-        });
+        const latestTests = this.state.latestTest;
+        latestTests[station] = res.data;
+        this.setState({ latestTests });
       });
   }
 
@@ -44,17 +42,16 @@ class Status extends Component {
   }
 
   sendCommand(cmd, station) {
-    axios.post(`command/${cmd}`, {
+    axios.post(`${baseURL}/command/${cmd}`, {
       station
-    }.then(() => {
-      this.testIsRunning(station);
     }).then(() => {
+      this.testIsRunning(station);
       this.getLatestTest(station);
-    }));
+    });
   }
 
   startTest(station) {
-    axios.post('updateVariable', {
+    axios.post(`${baseURL}/updateVariable`, {
       index: indexAction - station,
       value: indexStart,
       type: '3g'
@@ -63,14 +60,15 @@ class Status extends Component {
     this.sendCommand('start', station);
   }
 
-  startedAt() {
-    console.log(this.state.latestTest)
-    return moment(this.state.latestTest.startedAt).format('DD/MM/YYYY HH:mm');
+  startedAt(station) {
+    const latestTest = this.state.latestTest[station];
+    return moment(latestTest.startedAt).format('DD/MM/YYYY HH:mm');
   }
 
-  endedAt() {
-    if ('endedAt' in this.state.latestTest) {
-      return moment(this.state.latestTest.endedAt).format('DD/MM/YYYY HH:mm');
+  endedAt(station) {
+    const latestTest = this.state.latestTest[station];
+    if ('endedAt' in latestTest) {
+      return moment(latestTest.endedAt).format('DD/MM/YYYY HH:mm');
     }
     return 'Toujours en cours';
   }
@@ -105,17 +103,36 @@ class Status extends Component {
           <CardSection>
           <View style={view}>
             <Text style={leftText}>Commencé à:</Text>
-            <Text style={rightText}>{this.startedAt()}</Text>
+            <Text style={rightText}>{this.startedAt(0)}</Text>
           </View>
           </CardSection>
           <CardSection>
           <View style={view}>
             <Text style={leftText}>Terminé à: </Text>
-            <Text style={rightText}>{this.endedAt()}</Text>
+            <Text style={rightText}>{this.endedAt(0)}</Text>
           </View>
           </CardSection>
           <CardSection>
             {this.buttonTest(0)}
+          </CardSection>
+        </Card>
+
+        <Card>
+          <Header>Dernier test pour bouée 2</Header>
+          <CardSection>
+          <View style={view}>
+            <Text style={leftText}>Commencé à:</Text>
+            <Text style={rightText}>{this.startedAt(1)}</Text>
+          </View>
+          </CardSection>
+          <CardSection>
+          <View style={view}>
+            <Text style={leftText}>Terminé à: </Text>
+            <Text style={rightText}>{this.endedAt(1)}</Text>
+          </View>
+          </CardSection>
+          <CardSection>
+            {this.buttonTest(1)}
           </CardSection>
         </Card>
       </View>
