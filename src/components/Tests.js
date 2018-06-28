@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { View, Picker, Platform } from 'react-native';
-import { Card, CardSection, Button, Input, Header } from './common';
+import { Card, CardSection, Button, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 import { selectTest } from '../actions';
 import { connect } from 'react-redux';
@@ -27,7 +28,7 @@ class Tests extends Component {
 
   listItem() {
     return this.state.tests.map(test =>
-      <Picker.Item key={test._id} label={test.startedAt} value={test._id} />
+      <Picker.Item key={test._id} label={moment(test.startedAt).format('YYYY-MM-DD HH:mm:ss')} value={test._id} />
     );
   }
 
